@@ -38,6 +38,11 @@ export default function Home() {
                 Learn More
               </a>
             </Link>
+            <Link href="/add-ride" legacyBehavior>
+              <a className="btn-secondary">
+                Offer a Ride
+              </a>
+            </Link>
           </div>
         </div>
 

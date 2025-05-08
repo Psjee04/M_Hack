@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from '../components/Navbar';
 import { useRides } from '../contexts/RideContext';
-import { useAuth } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
 
 const geistSans = Geist({
@@ -56,19 +55,12 @@ const allUniversities = [
 
 export default function AddRidePage() {
   const { addRide } = useRides();
-  const { isAuthenticated } = useAuth();
   const router = useRouter();
 
   const [selectedState, setSelectedState] = useState("");
   const [universitiesInState, setUniversitiesInState] = useState([]);
   const [selectedUniversity, setSelectedUniversity] = useState("");
   const [formKey, setFormKey] = useState(Date.now()); // To reset the form
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/auth'); // Redirect to login if not authenticated
-    }
-  }, [isAuthenticated, router]);
 
   useEffect(() => {
     if (selectedState) {
@@ -105,10 +97,6 @@ export default function AddRidePage() {
     setSelectedUniversity("");
     setFormKey(Date.now()); // Change key to force re-render of form with fresh state if needed
   };
-  
-  if (!isAuthenticated) {
-    return <p className="text-center text-xl p-10">Redirecting to login...</p>; // Or a loading spinner
-  }
 
   return (
     <div className={`${geistSans.className} ${geistMono.className} min-h-screen bg-gradient-to-br from-blue-100/60 via-purple-50/70 to-indigo-100/60 dark:from-slate-900 dark:via-gray-800/90 dark:to-slate-900`}>

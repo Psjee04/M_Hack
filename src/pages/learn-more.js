@@ -54,8 +54,7 @@ export default function LearnMorePage() {
             <section>
               <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">Getting Started</h2>
               <p>
-                Ready to join? Simply <Link href="/register" legacyBehavior><a className="text-blue-600 hover:underline dark:text-blue-400">register for an account</a></Link>, 
-                search for available rides using the 'Find a Ride' feature, or offer your own ride via the 'Add a Ride' page 
+                Ready to join? Simply search for available rides using the 'Find a Ride' feature, or offer your own ride via the 'Add a Ride' page 
                 (available after logging in). Let's make campus travel better, together!
               </p>
             </section>
