@@ -211,7 +211,7 @@ export default function SearchRidePage() {
           </form>
 
           <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-6 text-center">Available Rides</h2>
+            <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-6 text-center">Rides Pool</h2>
             {searchPerformed && filteredRides.length === 0 && (
               <p className="text-gray-600 dark:text-gray-400 text-center py-4">No rides found matching your criteria.</p>
             )}
