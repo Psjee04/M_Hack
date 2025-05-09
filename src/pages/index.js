@@ -131,7 +131,7 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100">Quick Links</h4>
               <ul className="space-y-3">
-                <li><a href="#" className="footer-link">About Us</a></li>
+                <li><Link href="/about" legacyBehavior><a className="footer-link">About Us</a></Link></li>
                 <li><a href="#" className="footer-link">How It Works</a></li>
                 <li><a href="#" className="footer-link">Safety</a></li>
               </ul>
