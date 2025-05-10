@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from '../components/Navbar';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -168,6 +169,11 @@ export default function PostRide() {
                 >
                   Post Ride
                 </button>
+                <Link href="/next-page" legacyBehavior>
+                  <a className="ml-4 px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                    Go to Next Page
+                  </a>
+                </Link>
               </div>
             </form>
           </div>
