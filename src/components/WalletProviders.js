@@ -30,6 +30,12 @@ export const DiscoverWalletProviders = () => {
       }
     } catch (error) {
       console.error("Failed to connect to provider:", error);
+      // Check if the error is due to user rejection
+      if (error.code === 4001) { // 4001 is a common code for user rejection
+        alert('Connection request was rejected by the user. Please approve the request in your wallet to connect.');
+      } else {
+        alert('An error occurred while connecting to the wallet. Please try again or check your wallet settings.');
+      }
       // Handle connection error (e.g., user rejected request)
       setUserAccount("");
       setSelectedWallet(undefined);

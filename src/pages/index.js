@@ -2,6 +2,12 @@ import Image from "next/image";
 import Link from 'next/link';
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from '../components/Navbar';
+import WalletButton from '../components/walletbutton';
+
+// Dynamically import the counter components with no SSR
+// This prevents hydration errors with wallet adapters
+const NativeCounter = dynamic(() => import("./nativecounter"), { ssr: false });
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
