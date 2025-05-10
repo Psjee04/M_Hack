@@ -38,7 +38,7 @@ export default function Home() {
                 Learn More
               </a>
             </Link>
-            <Link href="/add-ride" legacyBehavior>
+            <Link href="/post-ride" legacyBehavior>
               <a className="btn-secondary">
                 Offer a Ride
               </a>

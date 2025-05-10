@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from '../components/Navbar';
 
@@ -12,63 +11,59 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function LearnMorePage() {
+export default function LearnMore() {
   return (
     <div className={`${geistSans.className} ${geistMono.className} min-h-screen bg-gradient-to-br from-blue-100/60 via-purple-50/70 to-indigo-100/60 dark:from-slate-900 dark:via-gray-800/90 dark:to-slate-900`}>
       <Navbar />
-      <main className="container mx-auto px-6 md:px-8 py-28 pt-40 md:pt-48 animate-fade-in-up">
-        <div className="max-w-3xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 md:p-10 rounded-2xl shadow-xl">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-800 dark:text-gray-50 mb-10 text-center">
+      <div className="container mx-auto px-6 md:px-8 py-28 pt-52 md:pt-60 animate-fade-in-up">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-8 text-gray-800 dark:text-gray-50 leading-tight">
             Learn More About Campus Carpool
           </h1>
-
-          <div className="space-y-8 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            <section>
-              <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">What is Campus Carpool?</h2>
-              <p>
-                Campus Carpool is a dedicated platform designed to connect students and faculty within the university community 
-                for ride-sharing. Whether you need a ride to campus, back home for the weekend, or just across town, 
-                our goal is to make travel more affordable, sustainable, and convenient.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">How It Benefits You</h2>
-              <ul className="list-disc list-inside space-y-2">
-                <li><span className="font-semibold">Save Money:</span> Split fuel and parking costs with fellow travelers.</li>
-                <li><span className="font-semibold">Reduce Environmental Impact:</span> Fewer cars on the road means less pollution and traffic.</li>
-                <li><span className="font-semibold">Convenience:</span> Find rides that match your schedule and destination easily.</li>
-                <li><span className="font-semibold">Build Community:</span> Connect with other students and staff during your commute.</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">Safety First</h2>
-              <p>
-                Your safety is our priority. We encourage users to verify university affiliations (where possible) and 
-                communicate clearly before sharing a ride. Always arrange to meet in well-lit, public places.
-                (Further safety features and guidelines would be detailed here in a full version).
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">Getting Started</h2>
-              <p>
-                Ready to join? Simply search for available rides using the 'Find a Ride' feature, or offer your own ride via the 'Add a Ride' page 
-                (available after logging in). Let's make campus travel better, together!
-              </p>
-            </section>
-          </div>
           
-          <div className="mt-12 text-center">
-            <Link href="/" legacyBehavior>
-                <a className="btn-secondary">
-                  Back to Home
-                </a>
-            </Link>
+          <div className="prose prose-lg dark:prose-invert max-w-none">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+              Campus Carpool is revolutionizing the way students travel around campus. Our platform connects drivers and passengers, making transportation more efficient, cost-effective, and environmentally friendly.
+            </p>
+
+            <h2 className="text-3xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Why Choose Campus Carpool?</h2>
+            <ul className="space-y-4 mb-8">
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-2">•</span>
+                <span className="text-gray-600 dark:text-gray-300">Convenient scheduling that fits your academic timetable</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-2">•</span>
+                <span className="text-gray-600 dark:text-gray-300">Cost-effective transportation with shared expenses</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-2">•</span>
+                <span className="text-gray-600 dark:text-gray-300">Verified student community for safe travel</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-2">•</span>
+                <span className="text-gray-600 dark:text-gray-300">Reduced carbon footprint for a greener campus</span>
+              </li>
+            </ul>
+
+            <h2 className="text-3xl font-semibold mb-4 text-gray-800 dark:text-gray-100">How to Get Started</h2>
+            <ol className="space-y-4 mb-8">
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-2">1.</span>
+                <span className="text-gray-600 dark:text-gray-300">Create your student profile with your university email</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-2">2.</span>
+                <span className="text-gray-600 dark:text-gray-300">Browse available rides or post your own</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-2">3.</span>
+                <span className="text-gray-600 dark:text-gray-300">Connect with fellow students and start carpooling</span>
+              </li>
+            </ol>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 } 
