@@ -2,12 +2,31 @@ import Image from "next/image";
 import Link from 'next/link';
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from '../components/Navbar';
-import WalletButton from '../components/walletbutton';
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useWallet } from '@solana/wallet-adapter-react';
 
-// Dynamically import the counter components with no SSR
-// This prevents hydration errors with wallet adapters
-const NativeCounter = dynamic(() => import("./nativecounter"), { ssr: false });
+// Program ID for the NATIVE counter smart contract
+const NATIVE_COUNTER_PROGRAM_ID = "ChHk6QWzTjdRH7eQRkPrh6HUxoNSi1go7jTXUm6YMp7z";
 
+// Program ID for the ANCHOR Counter Program (from solana-learn-main IDL)
+const ANCHOR_COUNTER_PROGRAM_ID = "4r6tCfcZddGA72vHBoCSB35oCYu7Ftqr3E7Psy2bfj8V";
+
+const ClientNativeCounter = dynamic(
+  () => import('./nativecounter').then(mod => mod.default),
+  {
+    ssr: false,
+    loading: () => <p className="text-center p-4">Loading Native Counter...</p>
+  }
+);
+
+const ClientAnchorCounterDemo = dynamic(
+  () => import('./AnchorCounterDemo').then(mod => mod.default),
+  {
+    ssr: false,
+    loading: () => <p className="text-center p-4">Loading Anchor Counter Demo...</p>
+  }
+);
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +39,20 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
+  const [selectedDemo, setSelectedDemo] = useState("none"); // "none", "native", "anchor"
+  const { publicKey, sendTransaction, connected, wallet: connectedWallet } = useWallet();
+
+  const walletProp = connected && publicKey && sendTransaction ? {
+    publicKey,
+    sendTransaction,
+    connected,
+    adapter: connectedWallet?.adapter
+  } : null;
+
   return (
     <div className={`${geistSans.className} ${geistMono.className} min-h-screen bg-gradient-to-br from-blue-100/60 via-purple-50/70 to-indigo-100/60 dark:from-slate-900 dark:via-gray-800/90 dark:to-slate-900`}>
       <Navbar />
-      {/* Main content wrapper for animation and refined padding */}
+      
       <div className="container mx-auto px-6 md:px-8 py-28 pt-52 md:pt-60 animate-fade-in-up">
         {/* Hero Section */}
         <div className="text-center mb-32 md:mb-40 max-w-4xl mx-auto">
@@ -80,6 +109,52 @@ export default function Home() {
             </div>
             <h3 className="text-3xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Go Green</h3>
             <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">Reduce carbon footprint and contribute to a sustainable campus environment</p>
+          </div>
+        </div>
+
+        {/* Smart Contract Demos Section */}
+        <div className="text-center mb-32 md:mb-40">
+          <div className="inline-block mb-8">
+            <span className="badge badge-teal">
+              Interactive Solana Demos
+            </span>
+          </div>
+          <h2 className="section-title mb-10">Explore Blockchain Integration</h2>
+          <div className="max-w-3xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-xl">
+            {!connected && (
+              <div className="text-center p-4">
+                <p className="text-lg text-red-500 dark:text-red-400 mb-4">Please connect your wallet to use the demos.</p>
+              </div>
+            )}
+            {connected && selectedDemo === "none" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <button onClick={() => setSelectedDemo("native")} className="btn-primary p-4 h-full">Native Counter</button>
+                <button onClick={() => setSelectedDemo("anchor")} className="btn-secondary p-4 h-full">Anchor Counter Demo</button>
+                <Link href="/send-sol-standalone" legacyBehavior>
+                  <a className="btn-success p-4 h-full flex items-center justify-center text-center">Send SOL (Standalone Page)</a>
+                </Link>
+              </div>
+            )}
+
+            {connected && selectedDemo === "native" && (
+              <ClientNativeCounter 
+                wallet={walletProp} 
+                programId={NATIVE_COUNTER_PROGRAM_ID}
+              />
+            )}
+
+            {connected && selectedDemo === "anchor" && (
+              <ClientAnchorCounterDemo 
+                wallet={walletProp} 
+                programId={ANCHOR_COUNTER_PROGRAM_ID} 
+              />
+            )}
+            
+            {selectedDemo !== "none" && (
+                <button onClick={() => setSelectedDemo("none")} className="mt-6 btn-outline w-full md:w-auto">
+                  Close Demo & Select Another
+                </button>
+            )}
           </div>
         </div>
 

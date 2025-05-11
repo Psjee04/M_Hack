@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import ThemeSwitcher from './ThemeSwitcher';
+// import ThemeSwitcher from './ThemeSwitcher'; // Old import
+import ClientSideThemeSwitcher from './ClientSideThemeSwitcher'; // New import
 import React, { useState } from 'react';
 import { DiscoverWalletProviders } from './WalletProviders';
 
@@ -28,13 +29,19 @@ export default function Navbar() {
                 Add a Ride
               </a>
             </Link>
+            <Link href="/send-sol" legacyBehavior>
+              <a className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors px-2 sm:px-0">
+                Send SOL
+              </a>
+            </Link>
             <button
               onClick={() => setShowWalletProviders(!showWalletProviders)}
               className="btn-primary py-1.5 sm:py-2 px-3 sm:px-5 text-xs sm:text-sm"
             >
               {showWalletProviders ? 'Hide Wallets' : 'Connect Wallet'}
             </button>
-            <ThemeSwitcher />
+            {/* <ThemeSwitcher /> */}{/* Old usage */}
+            <ClientSideThemeSwitcher /> {/* New usage */}
           </nav>
         </div>
         {showWalletProviders && (
